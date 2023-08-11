@@ -1,40 +1,60 @@
-import urllib
-from flask import Flask
 import re
 import json
 import requests
 from urllib.parse import quote
-from urllib.parse import unquote
+import xlsxwriter as xw
+import os
+
 
 #请求头
 headers = {
     'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36 Edg/115.0.1901.200',
     'Cookie': 'NC5_deviceId=169050548948190205; NC5_version_id=new_web_grey; _bl_uid=dOlRek6nlI9vh1baRqs8h8sk14mL; C5Lang=zh; NC5_crossAccessToken=undefined; noticeList=%5B%22173%22%5D; hideNotice=0; Hm_lvt_86084b1bece3626cd94deede7ecf31a8=1691629692,1691716535; CaseNotice=%E6%B4%BB%E5%8A%A8%E9%A5%B0%E5%93%81%E4%B8%80%E8%88%AC%E4%BC%9A%E5%9C%A830%E6%97%A5%E5%86%85%E6%9C%89%E5%BA%8F%E5%8F%91%E5%87%BA%EF%BC%8C%E5%A6%82%E6%9C%89%E9%97%AE%E9%A2%98%E5%8F%AF%E5%92%A8%E8%AF%A2%E5%9C%A8%E7%BA%BF%E5%AE%A2%E6%9C%8D%E3%80%82%20%20; Hm_lpvt_86084b1bece3626cd94deede7ecf31a8=1691725854'
 }
+fileName = '../jewelry.xls'
+def xw_toExcel(data):  # xlsxwriter库储存数据到excel
+    if os.path.exists(fileName):
+        os.remove(fileName)
+        print('删除旧文件')
+    workbook = xw.Workbook(fileName)  # 创建工作簿
+    worksheet1 = workbook.add_worksheet("sheet1")  # 创建子表
+    worksheet1.activate()  # 激活表
+    title = ['饰品名称', 'c5价格']  # 设置表头
+    worksheet1.write_row('A1', title)  # 从A1单元格开始写入表头
+    i = 2  # 从第二行开始写入数据
+    for j in range(len(data)):
+        insertData = [data[j]["name"], data[j]["price"]]
+        row = 'A' + str(i)
+        worksheet1.write_row(row, insertData)
+        i += 1
+    workbook.close()  # 关闭表
+
 #根据饰品id列表获取价格列表（名称：价格）
 def getPrice(jewelryList):
     urlPathStart = 'https://www.c5game.com/napi/trade/steamtrade/sga/sell/v3/list?itemId='
     urlPathEnd = '&delivery=2&page=1&limit=10'
     try:
+        data = []
+        dic = {}
         for jewelry in jewelryList:
             url = urlPathStart + jewelry + urlPathEnd
             response = requests.get(url, headers=headers)
-            if response.status_code == 200:
-                jsonStr = json.loads(response.text)
-                items = jsonStr['data']['list']
-                if(len(items) != 0):
-                    item = items[0]
-                    name = item['itemName']
-                    price = item['cnyPrice']
-                    statTrak = 'StatTrak'                                         #去除暗金
-                    if(statTrak in name):
-                        continue
-                    print(name + ": " + price)
-            else:
-                print('响应码错误:' + response.status_code)
+            jsonStr = json.loads(response.text)
+            items = jsonStr['data']['list']
+            if(len(items) != 0):
+                item = items[0]
+                name = item['itemName']
+                price = item['cnyPrice']
+                statTrak = 'StatTrak'                                         #去除暗金
+                if(statTrak in name):
+                    continue
+                print(name + ": " + price)
+                dic['name'] = name
+                dic['price'] = price
+                data.append(dic)
+        xw_toExcel(data)
     except:
         print('爬取失败')
-
 
 #根据检索关键词列表获取价格列表（名称：价格）
 def getAllPrice(nameList):
@@ -63,7 +83,7 @@ def getAllPrice(nameList):
     except:
         print('爬取失败')
 
-nameList = ['暴怒野兽 崭新出厂']
+nameList = ['M4A1 消音型 | 暴怒野兽 (崭新出厂)']
 getAllPrice(nameList)
 
 
