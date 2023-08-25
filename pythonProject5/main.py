@@ -12,7 +12,7 @@ C5Headers = {
 }
 buffHeaders = {
     'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36 Edg/115.0.1901.200',
-    'Cookie': '_ntes_nnid=a81ea4b883a087c51b7d8b9f7ce5c913,1690947339047; _ntes_nuid=a81ea4b883a087c51b7d8b9f7ce5c913; Device-Id=3ABe7sqJnoICsII0jmdm; timing_user_id=time_AJGrS6MTiv; P_INFO=13162147622|1691974203|1|netease_buff|00&99|null&null&null#shh&null#10#0|&0|null|13162147622; remember_me=U1102355461|2CftSTVqcxaY6rfX15EhBTdQMKiHLTUy; session=1-nJJ3GN-vat7x5lA8Lxm56heQc50eSWW2XiyGtOdawFpL2038039389; Locale-Supported=zh-Hans; game=csgo; csrf_token=ImFlY2YwMDczNGY1Nzg1ODNjYThmMjNhNDBkYjg2MzkwYWM5YWU1ZGUi.F79AIg.xdNc9hq5-phScpycSKaHl2H6f50'
+    'Cookie': '_ntes_nnid=a81ea4b883a087c51b7d8b9f7ce5c913,1690947339047; _ntes_nuid=a81ea4b883a087c51b7d8b9f7ce5c913; Device-Id=3ABe7sqJnoICsII0jmdm; timing_user_id=time_AJGrS6MTiv; Locale-Supported=zh-Hans; game=csgo; NTES_YD_SESS=45bFJy7EcYyXVpqRv0jFyz7fslEDJ36FLNisa4M5UtfbP_OdPs6CJlG62Bx1iTltDaX031c77WspWNtXLtQM_Lyu1l2LF1aRIxd2GImRHc5W0mpCKAYyt.3jmo3.lCHvmIOdf17hZEldO0xVzkC7XRVO.hoBi.2gDKih0tfW1v1iEDWWJnulp8oQA3necPkO7ymtq7Qe8gg1CFPLqlpIqnO7ZVKIFQH.aDOzsP4DPEvbG; S_INFO=1692752001|0|0&60##|13162147622; P_INFO=13162147622|1692752001|1|netease_buff|00&99|null&null&null#shh&null#10#0|&0||13162147622; remember_me=U1102355461|6P03qYmAbGdQNlIi37qpPGJUCazULUaE; session=1-GFY41TYmOC5NJ12WyuBdGodUIN6GRVl34JtGoLq3VgI42038039389; csrf_token=IjE1ZGVlMDI4MDdlNTJiNjFhZTk1ZDEzOGMyZDM0YzExMGEzMDQ3MjQi.F8bqoA.16WDm8Lc7GwIsdUmGZyskLqP1zc'
 }
 #文件名
 fileName = '../jewelry.xls'
