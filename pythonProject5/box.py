@@ -43,6 +43,7 @@ lowPrice = 10
 highPrice = 2000
 lowSaleNumber = 300
 fileName = '../jewelry2.xls'
+
 def xw_toExcel(data,data1,uuSellPriceList,uuBuyPriceList):  # xlsxwriter库储存数据到excel
     workbook = xw.Workbook(fileName)  # 创建工作簿
     worksheet1 = workbook.add_worksheet("sheet1")  # 创建子表
@@ -61,6 +62,9 @@ def xw_toExcel(data,data1,uuSellPriceList,uuBuyPriceList):  # xlsxwriter库储�
     worksheet1.set_column('A:A',50)
     worksheet1.set_column('B:I',20)
     workbook.close()  # 关闭表
+
+
+
 def getAllBoxID():
     urlPathStart = 'https://www.c5game.com/playground/case'
     try:
@@ -107,6 +111,9 @@ def getJewelryList(boxIDList):
                             continue
                         souvenir = '纪念品'
                         if (souvenir in itemName):
+                            continue
+                        misicBox = '花脸'
+                        if (misicBox in itemName):
                             continue
                         itemID = item['item_id']
                         jewelryList.append(itemID)
@@ -169,14 +176,15 @@ def getBuffAllPrice(dataList):
                     itemSellPirce = item['sell_min_price']
                     itemBuyPrice = item['buy_max_price']
                     itemSteamPrice = item['goods_info']['steam_price_cny']
-                    if (itemName != data['name']):
+                    statTrak = 'StatTrak'  # 去除暗金
+                    if (statTrak in itemName):
                         continue
-                    # statTrak = 'StatTrak'  # 去除暗金
-                    # if (statTrak in itemName):
-                    #     continue
-                    # souvenir = '纪念品'
-                    # if (souvenir in itemName):
-                    #     continue
+                    souvenir = '纪念品'
+                    if (souvenir in itemName):
+                        continue
+                    misicBox = '花脸'
+                    if (misicBox in itemName):
+                        continue
                     print(itemName + ': ' + itemSellPirce + '   ' + itemBuyPrice + '   ' + itemSteamPrice)
                     dic = {}
                     dic['buffSellPrice'] = itemSellPirce
