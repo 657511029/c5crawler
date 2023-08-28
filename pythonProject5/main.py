@@ -12,7 +12,7 @@ C5Headers = {
 }
 buffHeaders = {
     'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36 Edg/115.0.1901.200',
-    'Cookie': '_ntes_nnid=a81ea4b883a087c51b7d8b9f7ce5c913,1690947339047; _ntes_nuid=a81ea4b883a087c51b7d8b9f7ce5c913; Device-Id=3ABe7sqJnoICsII0jmdm; timing_user_id=time_AJGrS6MTiv; Locale-Supported=zh-Hans; game=csgo; NTES_YD_SESS=45bFJy7EcYyXVpqRv0jFyz7fslEDJ36FLNisa4M5UtfbP_OdPs6CJlG62Bx1iTltDaX031c77WspWNtXLtQM_Lyu1l2LF1aRIxd2GImRHc5W0mpCKAYyt.3jmo3.lCHvmIOdf17hZEldO0xVzkC7XRVO.hoBi.2gDKih0tfW1v1iEDWWJnulp8oQA3necPkO7ymtq7Qe8gg1CFPLqlpIqnO7ZVKIFQH.aDOzsP4DPEvbG; S_INFO=1692752001|0|0&60##|13162147622; P_INFO=13162147622|1692752001|1|netease_buff|00&99|null&null&null#shh&null#10#0|&0||13162147622; remember_me=U1102355461|6P03qYmAbGdQNlIi37qpPGJUCazULUaE; session=1-GFY41TYmOC5NJ12WyuBdGodUIN6GRVl34JtGoLq3VgI42038039389; csrf_token=IjE1ZGVlMDI4MDdlNTJiNjFhZTk1ZDEzOGMyZDM0YzExMGEzMDQ3MjQi.F8bqoA.16WDm8Lc7GwIsdUmGZyskLqP1zc'
+    'Cookie': '_ntes_nnid=a81ea4b883a087c51b7d8b9f7ce5c913,1690947339047; _ntes_nuid=a81ea4b883a087c51b7d8b9f7ce5c913; Device-Id=3ABe7sqJnoICsII0jmdm; timing_user_id=time_AJGrS6MTiv; Locale-Supported=zh-Hans; game=csgo; AQ_HD=1; YD_SC_SID=624E8F2F08404604A8ECC0A9A7594388; AQ_REQ_FROM=webzj; NTES_YD_SESS=dBpdmWLRcSGCvBLmxymnQiz1uDOnnJKj6pZgLdVoTmJuqC5iqgFBt6PFs.7EZ_6mYLWGAEyRRzg4zpmWcmrVCcXhE6sc0ELel7isPlQeNyozGQ4Bv2MXm8AUQDA86BN9Ql5iJERSwf6i5G7knOBRWek58SD.Z8sKYQjtjUoR2iJO1E1iNfaxaD8mwbUFM00mc4amJK7NJPBaxMW2w6qGY0kRwkvl0rN8LY5ngqdYqf9uP; S_INFO=1693206419|0|0&60##|13162147622; P_INFO=13162147622|1693206419|1|netease_buff|00&99|null&null&null#shh&null#10#0|&0|null|13162147622; remember_me=U1102355461|F8sxxahVWHiaaHcRtzmqH4i7KbjmPoDu; session=1-9vKV3-1blP5LYUmdEDJMMUNrlIIEJmgOIJJ_DXeN70vX2038039389; csrf_token=ImE2OGI3ZDViMTI1ZjcwNGZjODM3ZjQ2ODFiZTMzOWE5MDE0Y2EzNTQi.F83ZPw.P_pUG0eBtFdQ1Qo2wEbBwhoDn-E'
 }
 #文件名
 fileName = '../jewelry.xls'
@@ -161,7 +161,7 @@ def getBuffAllPrice(nameList):
                     dic['buffBuyPrice'] = itemBuyPrice
                     dic['steamPrice'] = itemSteamPrice
                     data.append(dic)
-            time.sleep(1.5)
+            time.sleep(3)
         return data
     except:
         print('爬取失败')

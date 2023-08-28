@@ -1,5 +1,6 @@
-import base64
 import json
+import time
+
 import requests
 
 
@@ -73,25 +74,27 @@ def getUUUserID():
     userID = jsonStr['Data']['UserId']
     return userID
 def getUUJewelryList(nameList):
-    uuUrl = 'https://api.youpin898.com/api/homepage/search/list'
+    uuUrl = 'https://api.youpin898.com/api/homepage/search/match'
     jewelryList = []
     for name in nameList:
         uuData = {
-            'gameId': '730',
             'keyWords': name,
-            'listSortType': '2',
-            'listType': '10',
-            'pageIndex': 1,
-            'pageSize': 20,
-            'sortType': '0',
-            'stickers': {},
-            'stickersIsSort': False
+            'listType': '10'
         }
         html = session.post(uuUrl, headers=uuHeaders, json=uuData)
-        html.encoding = 'utf-8'
         jsonStr = json.loads(html.text)
-        JewelryID = jsonStr['Data']['commodityTemplateList'][0]['Id']
-        jewelryList.append(JewelryID)
+        items = jsonStr['Data']['dataList']
+        for item in items:
+            jewelryID = item['templateId']
+            jewelryName = item['commodityName']
+            statTrak = 'StatTrak'  # 去除暗金
+            if (statTrak in jewelryName):
+                continue
+            souvenir = '纪念品'
+            if (souvenir in jewelryName):
+                continue
+            jewelryList.append(jewelryID)
+        time.sleep(0.1)
     return jewelryList
 
 def getUUSellPrice(jewelryList,userID):
@@ -110,11 +113,10 @@ def getUUSellPrice(jewelryList,userID):
             'userId': userID
         }
         html = session.post(uuUrl, headers=uuHeaders, json=uuData)
-        html.encoding = 'utf-8'
         jsonStr = json.loads(html.text)
         price = jsonStr['Data']['CommodityList'][0]['Price']
-        print(jsonStr['Data']['CommodityList'][0]['CommodityName'])
         uuSellPriceList.append(price)
+        time.sleep(0.1)
     return uuSellPriceList
 def getUUBuyPrice(jewelryList):
     uuUrl = 'https://api.youpin898.com/api/youpin/commodity/purchase/find'
@@ -126,10 +128,10 @@ def getUUBuyPrice(jewelryList):
             'templateId': jewelry
         }
         html = session.post(uuUrl, headers=uuHeaders, json=uuData)
-        html.encoding = 'utf-8'
         jsonStr = json.loads(html.text)
-        price = jsonStr['Data']['response'][0]['unitPrice']
-        uuBuyPriceList.append(price)
+        price = jsonStr['data']['response'][0]['unitPrice']
+        uuBuyPriceList.append(price/100.00)
+        time.sleep(0.1)
     return uuBuyPriceList
 
 jewelryList = getUUJewelryList(nameList)
@@ -138,4 +140,4 @@ userID = getUUUserID()
 uuSellPriceList = getUUSellPrice(jewelryList,userID)
 uuBuyPriceList = getUUBuyPrice(jewelryList)
 for i in range(0, len(nameList)):
-    print(nameList[i] + ': ' + uuSellPriceList[i] + '   ' + uuBuyPriceList[i])
+    print(nameList[i] + ': ' + str(uuSellPriceList[i]) + '   ' + str(uuBuyPriceList[i]))
