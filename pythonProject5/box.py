@@ -26,8 +26,8 @@ loginHeaders = {
     'Referer': 'https://www.youpin898.com/'
 }
 loginData = {
-    'UserName': '13162147622',
-    'UserPwd': 'Lenshanshan521',
+    'UserName': '',
+    'UserPwd': '',
     'Code': '',
     'SessionId': ''
 }
@@ -186,7 +186,7 @@ def getBuffAllPrice(dataList):
             else:
                 print("响应码错误" + response.status_code)
                 sys.exit(1)
-            time.sleep(3)
+            time.sleep(2)
         return data1
     except:
         print('爬取失败')
