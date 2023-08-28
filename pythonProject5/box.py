@@ -26,8 +26,8 @@ loginHeaders = {
     'Referer': 'https://www.youpin898.com/'
 }
 loginData = {
-    'UserName': '',
-    'UserPwd': '',
+    'UserName': '13162147622',
+    'UserPwd': 'Lenshanshan521',
     'Code': '',
     'SessionId': ''
 }
@@ -39,8 +39,8 @@ uuHeaders = {
     'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/116.0.0.0 Safari/537.36',
     'Authorization': 'Bearer ' + token
 }
-lowPrice = 50
-highPrice = 100
+lowPrice = 10
+highPrice = 2000
 lowSaleNumber = 300
 fileName = '../jewelry2.xls'
 def xw_toExcel(data,data1,uuSellPriceList,uuBuyPriceList):  # xlsxwriter库储存数据到excel
@@ -169,7 +169,7 @@ def getBuffAllPrice(dataList):
                     itemSellPirce = item['sell_min_price']
                     itemBuyPrice = item['buy_max_price']
                     itemSteamPrice = item['goods_info']['steam_price_cny']
-                    if (item != name):
+                    if (itemName != data['name']):
                         continue
                     # statTrak = 'StatTrak'  # 去除暗金
                     # if (statTrak in itemName):
