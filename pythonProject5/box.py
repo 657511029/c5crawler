@@ -194,7 +194,7 @@ def getBuffAllPrice(dataList):
             else:
                 print("响应码错误" + response.status_code)
                 sys.exit(1)
-            time.sleep(2)
+            time.sleep(4)
         return data1
     except:
         print('爬取失败')
@@ -286,13 +286,13 @@ def start(fileName):
     jewelryList = getJewelryList(boxIDList)
     dataList = getC5Price(jewelryList)
     print(len(dataList))
-    dataList2 = getBuffAllPrice(dataList)
-    print(len(dataList2))
     uuJewelryList = getUUJewelryList(dataList)
     print(len(uuJewelryList))
     userID = getUUUserID()
     uuSellPriceList = getUUSellPrice(uuJewelryList, userID)
     uuBuyPriceList = getUUBuyPrice(uuJewelryList)
+    dataList2 = getBuffAllPrice(dataList)
+    print(len(dataList2))
     xw_toExcel(dataList, dataList2,uuSellPriceList,uuBuyPriceList)
     print('成功写入')
 
