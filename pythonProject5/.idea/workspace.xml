@@ -5,12 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c7333f8e-b950-4651-a2e5-52ddad58f83a" name="Changes" comment="增加获取Buff最低售价和最高求购，但因为Buff访问限制，爬取时间过长">
-      <change afterPath="$PROJECT_DIR$/C5AtutoBuy.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/C5Buy.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/box.py" beforeDir="false" afterPath="$PROJECT_DIR$/box.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/c5agme.py" beforeDir="false" afterPath="$PROJECT_DIR$/c5agme.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test.py" beforeDir="false" afterPath="$PROJECT_DIR$/test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -44,7 +42,7 @@
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
-  <component name="RunManager" selected="Python.C5AtutoBuy">
+  <component name="RunManager" selected="Python.c5agme">
     <configuration name="C5AtutoBuy" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="pythonProject5" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -179,9 +177,9 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.C5AtutoBuy" />
         <item itemvalue="Python.c5agme" />
         <item itemvalue="Python.box" />
+        <item itemvalue="Python.C5AtutoBuy" />
         <item itemvalue="Python.uuyp" />
         <item itemvalue="Python.test" />
       </list>
@@ -209,7 +207,8 @@
       <workItem from="1692838846666" duration="8434000" />
       <workItem from="1692925121794" duration="18504000" />
       <workItem from="1693184000662" duration="24780000" />
-      <workItem from="1693269670697" duration="18321000" />
+      <workItem from="1693269670697" duration="20175000" />
+      <workItem from="1693356241774" duration="4778000" />
     </task>
     <task id="LOCAL-00001" summary="增加获取Buff最低售价和最高求购，但因为Buff访问限制，爬取时间过长">
       <option name="closed" value="true" />
@@ -253,9 +252,9 @@
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/pythonProject5$uu.coverage" NAME="uuyp Coverage Results" MODIFIED="1692063971135" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/pythonProject5$c5agme.coverage" NAME="c5agme Coverage Results" MODIFIED="1693294665938" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/pythonProject5$box.coverage" NAME="box Coverage Results" MODIFIED="1693285868645" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/pythonProject5$C5AtutoBuy.coverage" NAME="C5AtutoBuy Coverage Results" MODIFIED="1693296807274" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/pythonProject5$c5agme.coverage" NAME="c5agme Coverage Results" MODIFIED="1693361226772" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/pythonProject5$box.coverage" NAME="box Coverage Results" MODIFIED="1693356334136" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/pythonProject5$C5AtutoBuy.coverage" NAME="C5AtutoBuy Coverage Results" MODIFIED="1693299493240" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/pythonProject5$buff.coverage" NAME="buff Coverage Results" MODIFIED="1692595815670" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/pythonProject5$test.coverage" NAME="test Coverage Results" MODIFIED="1692930937108" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/pythonProject5$uuyp.coverage" NAME="uuyp Coverage Results" MODIFIED="1693187805909" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />

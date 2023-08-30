@@ -23,8 +23,8 @@ loginHeaders = {
     'Referer': 'https://www.youpin898.com/'
 }
 loginData = {
-    'UserName': '',
-    'UserPwd': '',
+    'UserName': '13162147622',
+    'UserPwd': 'Lenshanshan521',
     'Code': '',
     'SessionId': ''
 }
@@ -97,7 +97,7 @@ def getJewelryList(boxIDList):
 
 def getC5Price(jewelryList):
     urlPathStart = 'https://www.c5game.com/napi/trade/steamtrade/sga/sell/v3/list?itemId='
-    urlPathEnd = '&delivery=2&page=1&limit=10'
+    urlPathEnd = '&delivery=&page=1&limit=10'
     try:
         dataList = []
         for jewelry in jewelryList:

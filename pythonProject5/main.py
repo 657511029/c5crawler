@@ -78,7 +78,7 @@ def xw_toExcel(data,data1):  # xlsxwriter库储存数据到excel
 #根据饰品id列表获取价格列表（名称：价格）
 def getC5Price(jewelryList):
     urlPathStart = 'https://www.c5game.com/napi/trade/steamtrade/sga/sell/v3/list?itemId='
-    urlPathEnd = '&delivery=2&page=1&limit=10'
+    urlPathEnd = '&delivery=&page=1&limit=10'
     try:
         data = []
         for jewelry in jewelryList:
