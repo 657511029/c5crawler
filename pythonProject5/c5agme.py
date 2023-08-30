@@ -23,8 +23,8 @@ loginHeaders = {
     'Referer': 'https://www.youpin898.com/'
 }
 loginData = {
-    'UserName': '13162147622',
-    'UserPwd': 'Lenshanshan521',
+    'UserName': '',
+    'UserPwd': '',
     'Code': '',
     'SessionId': ''
 }

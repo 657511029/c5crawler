@@ -5,10 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c7333f8e-b950-4651-a2e5-52ddad58f83a" name="Changes" comment="增加获取Buff最低售价和最高求购，但因为Buff访问限制，爬取时间过长">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/box.py" beforeDir="false" afterPath="$PROJECT_DIR$/box.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/c5agme.py" beforeDir="false" afterPath="$PROJECT_DIR$/c5agme.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -208,7 +206,7 @@
       <workItem from="1692925121794" duration="18504000" />
       <workItem from="1693184000662" duration="24780000" />
       <workItem from="1693269670697" duration="20175000" />
-      <workItem from="1693356241774" duration="4778000" />
+      <workItem from="1693356241774" duration="4910000" />
     </task>
     <task id="LOCAL-00001" summary="增加获取Buff最低售价和最高求购，但因为Buff访问限制，爬取时间过长">
       <option name="closed" value="true" />
