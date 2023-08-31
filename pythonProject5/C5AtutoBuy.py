@@ -18,62 +18,55 @@ C5Headers = {
 
 def getAllBoxID():
     urlPathStart = 'https://www.c5game.com/playground/case'
-    try:
-        url = urlPathStart
-        response = requests.get(url, headers=C5Headers)
-        if response.status_code == 200:
-            boxIDList = []
-            html = response.text
-            id_pattern = '<a href="(.*?)" class="case-zone-group pointer relative"'
-            boxUrlStr = json.dumps(re.findall(id_pattern, html)).encode('unicode-escape').decode('unicode-escape')
-            boxUrlStr = boxUrlStr.strip('[')
-            boxUrlStr = boxUrlStr.strip(']')
-            boxUrlList = boxUrlStr.split(',')
-            for item in boxUrlList:
-                item = item.strip()
-                item = item.strip('\"/playground/case/')
-                item = item[0:3]
-                boxIDList.append(item)
-            boxIDList = list(dict.fromkeys(boxIDList))
-            return boxIDList
-        else:
-            print('响应码错误: ' + response.status_code)
-
-    except:
-        print('爬取失败')
+    url = urlPathStart
+    response = requests.get(url, headers=C5Headers)
+    if response.status_code == 200:
+        boxIDList = []
+        html = response.text
+        id_pattern = '<a href="(.*?)" class="case-zone-group pointer relative"'
+        boxUrlStr = json.dumps(re.findall(id_pattern, html)).encode('unicode-escape').decode('unicode-escape')
+        boxUrlStr = boxUrlStr.strip('[')
+        boxUrlStr = boxUrlStr.strip(']')
+        boxUrlList = boxUrlStr.split(',')
+        for item in boxUrlList:
+            item = item.strip()
+            item = item.strip('\"/playground/case/')
+            item = item[0:3]
+            boxIDList.append(item)
+        boxIDList = list(dict.fromkeys(boxIDList))
+        return boxIDList
+    else:
+        print('响应码错误: ' + response.status_code)
 
 def getJewelryList(boxIDList):
-    try:
-        urlStart = 'https://www.c5game.com/napi/trade/c5-games/blind-box/v1/case-detail?case_id='
-        jewelryList = []
-        for boxID in boxIDList:
-            url = urlStart + boxID
-            response = requests.get(url, headers=C5Headers)
-            if response.status_code == 200:
-                jsonStr = json.loads(response.text)
-                itemsList = jsonStr['data']['items']
-                for items in itemsList:
-                    items = itemsList[items]
-                    for item in items:
-                        itemName = item['name']
-                        statTrak = 'StatTrak'  # 去除暗金
-                        if (statTrak in itemName):
-                            continue
-                        souvenir = '纪念品'
-                        if (souvenir in itemName):
-                            continue
-                        misicBox = '花脸'
-                        if (misicBox in itemName):
-                            continue
-                        out = '★'
-                        if(out in itemName):
-                            continue
-                        itemID = item['item_id']
-                        jewelryList.append(itemID)
-        jewelryList = list(dict.fromkeys(jewelryList))
-        return jewelryList
-    except:
-        print('爬取失败')
+    urlStart = 'https://www.c5game.com/napi/trade/c5-games/blind-box/v1/case-detail?case_id='
+    jewelryList = []
+    for boxID in boxIDList:
+        url = urlStart + boxID
+        response = requests.get(url, headers=C5Headers)
+        if response.status_code == 200:
+            jsonStr = json.loads(response.text)
+            itemsList = jsonStr['data']['items']
+            for items in itemsList:
+                items = itemsList[items]
+                for item in items:
+                    itemName = item['name']
+                    statTrak = 'StatTrak'  # 去除暗金
+                    if (statTrak in itemName):
+                        continue
+                    souvenir = '纪念品'
+                    if (souvenir in itemName):
+                        continue
+                    misicBox = '花脸'
+                    if (misicBox in itemName):
+                        continue
+                    out = '★'
+                    if (out in itemName):
+                        continue
+                    itemID = item['item_id']
+                    jewelryList.append(itemID)
+    jewelryList = list(dict.fromkeys(jewelryList))
+    return jewelryList
 
 def getC5Price(jewelryList):
     urlPathStart = 'https://www.c5game.com/napi/trade/steamtrade/sga/purchase/v2/list?itemId='
@@ -116,6 +109,7 @@ def getC5AutoPrice(dataList):
             print(data['name'] + ": " + str(data['price']) + '    ' + str(autoPrice))
 def start():
     boxIDList = getAllBoxID()
+    print(len(boxIDList))
     jewelryList = getJewelryList(boxIDList)
     print(len(jewelryList))
     dataList = getC5Price(jewelryList)

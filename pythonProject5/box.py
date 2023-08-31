@@ -40,7 +40,7 @@ uuHeaders = {
     'Authorization': 'Bearer ' + token
 }
 lowPrice = 10
-highPrice = 2000
+highPrice = 300
 lowSaleNumber = 300
 fileName = '../jewelry2.xls'
 
