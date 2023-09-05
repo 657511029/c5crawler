@@ -1,12 +1,7 @@
 import re
 import json
-import sys
-import time
-
 import requests
-from urllib.parse import quote
-import xlsxwriter as xw
-import os
+
 
 lowPrice = 10
 highPrice = 2000

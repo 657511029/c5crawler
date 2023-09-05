@@ -48,19 +48,20 @@ def xw_toExcel(data,data1,uuSellPriceList,uuBuyPriceList):  # xlsxwriter库储�
     workbook = xw.Workbook(fileName)  # 创建工作簿
     worksheet1 = workbook.add_worksheet("sheet1")  # 创建子表
     worksheet1.activate()  # 激活表
-    title = ['饰品名称', 'c5自发价格','buff最低售价','buff最高求购','uu最低售价','uu最高求购','C5自发/buff','C5自发/uu求购','steam/buff']  # 设置表头
+    title = ['饰品名称', 'c5自发价格','buff最低售价','buff最高求购','uu最低售价','uu最高求购','C5自发/buff','C5自发/uu求购','buff在售/uu求购','steam/buff']  # 设置表头
     worksheet1.write_row('A1', title)  # 从A1单元格开始写入表头
     i = 2  # 从第二行开始写入数据
     for j in range(len(data)):
         buffProfit =  (0.99 * float(data[j]['price'])/float(data1[j]['buffSellPrice']) - 1) * 100
         steamProfit = float(data1[j]['buffSellPrice'])/(float(data1[j]['steamPrice']) * 0.86)
         uuBuyProfit =  (0.99 * float(data[j]['price'])/uuBuyPriceList[j] - 1) * 100
-        insertData = [data[j]["name"], data[j]["price"],data1[j]["buffSellPrice"],data1[j]["buffBuyPrice"],uuSellPriceList[j],uuBuyPriceList[j],buffProfit,uuBuyProfit,steamProfit]
+        buffUU =  (float(data1[j]['buffSellPrice'])/uuBuyPriceList[j] - 1) * 100
+        insertData = [data[j]["name"], data[j]["price"],data1[j]["buffSellPrice"],data1[j]["buffBuyPrice"],uuSellPriceList[j],uuBuyPriceList[j],buffProfit,uuBuyProfit,buffUU,steamProfit]
         row = 'A' + str(i)
         worksheet1.write_row(row, insertData)
         i += 1
     worksheet1.set_column('A:A',50)
-    worksheet1.set_column('B:I',20)
+    worksheet1.set_column('B:J',20)
     workbook.close()  # 关闭表
 
 

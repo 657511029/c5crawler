@@ -2,7 +2,7 @@ import re
 import json
 import sys
 import time
-
+import pandas as pd
 import requests
 from urllib.parse import quote
 import xlsxwriter as xw
@@ -10,7 +10,7 @@ import os
 
 lowPrice = 10
 highPrice = 2000
-
+fileName = '../jewelry5.xls'
 C5Headers = {
     'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36 Edg/115.0.1901.200',
     'Cookie': 'NC5_deviceId=169050548948190205; NC5_version_id=new_web_grey; _bl_uid=dOlRek6nlI9vh1baRqs8h8sk14mL; noticeList=%5B%22174%22%5D; hideNotice=0; Hm_lvt_86084b1bece3626cd94deede7ecf31a8=1692579256,1692670832,1692751966,1692841262; NC5_newC5login=1; PHPSESSID=eto84kfqiql35fpetcaedussr3; CaseNotice=%E6%B4%BB%E5%8A%A8%E9%A5%B0%E5%93%81%E4%B8%80%E8%88%AC%E4%BC%9A%E5%9C%A830%E6%97%A5%E5%86%85%E6%9C%89%E5%BA%8F%E5%8F%91%E5%87%BA%EF%BC%8C%E5%A6%82%E6%9C%89%E9%97%AE%E9%A2%98%E5%8F%AF%E5%92%A8%E8%AF%A2%E5%9C%A8%E7%BA%BF%E5%AE%A2%E6%9C%8D%E3%80%82%20%20; NC5_uid=1000189316; NC5_isShowInspect=-1; _csrf=ef31974c96bf8f8cda74f9546539babbd8d43ae8ec6df9fb0bf128ad362262c9a%3A2%3A%7Bi%3A0%3Bs%3A5%3A%22_csrf%22%3Bi%3A1%3Bs%3A32%3A%22Tnltc1spYsUAgB6xoY7ly4uGTGbCJpat%22%3B%7D; NC5_crossAccessToken=undefined; Hm_lpvt_86084b1bece3626cd94deede7ecf31a8=1692858886'
@@ -36,6 +36,26 @@ uuHeaders = {
     'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/116.0.0.0 Safari/537.36',
     'Authorization': 'Bearer ' + token
 }
+
+def xw_toExcel(jewelryList):  # xlsxwriter库储存数据到excel
+    workbook = xw.Workbook(fileName)  # 创建工作簿
+    worksheet1 = workbook.add_worksheet("sheet1")  # 创建子表
+    worksheet1.activate()  # 激活表
+    title = ['C5饰品id']  # 设置表头
+    worksheet1.write_row('A1', title)  # 从A1单元格开始写入表头
+    i = 2  # 从第二行开始写入数据
+    for j in range(len(jewelryList)):
+        insertData = [jewelryList[j]]
+        row = 'A' + str(i)
+        worksheet1.write_row(row, insertData)
+        i += 1
+    worksheet1.set_column('A:A',20)
+    workbook.close()  # 关闭表
+def xr_formExcel(fileName):
+    df = pd.read_excel(fileName,sheet_name= 'sheet1')
+    listx = df['C5饰品id'].tolist()
+    listx = [str(i) for i in listx]
+    return listx
 def getAllBoxID():
     urlPathStart = 'https://www.c5game.com/playground/case'
     try:
@@ -114,6 +134,12 @@ def getC5Price(jewelryList):
                     continue
                 souvenir = '纪念品'
                 if(souvenir in name):
+                    continue
+                misicBox = '花脸'
+                if (misicBox in name):
+                    continue
+                out = '★'
+                if (out in name):
                     continue
                 if(float(price) < lowPrice):
                     continue
@@ -201,8 +227,18 @@ def getUUBuyPrice(jewelryList):
             print(name + ': ' + jewelry['price'] + '  ' + str(price/100.00))
         time.sleep(0.1)
 def start():
-    boxIDList = getAllBoxID()
-    jewelryList = getJewelryList(boxIDList)
+    if os.path.exists(fileName):
+        print('读取文件')
+        jewelryList = xr_formExcel(fileName)
+        print(len(jewelryList))
+        jewelryList = list(dict.fromkeys(jewelryList))
+        os.remove(fileName)
+        xw_toExcel(jewelryList)
+        print('更新旧文件')
+    else:
+        boxIDList = getAllBoxID()
+        jewelryList = getJewelryList(boxIDList)
+
     print(len(jewelryList))
     dataList = getC5Price(jewelryList)
     print(len(dataList))
