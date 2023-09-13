@@ -1,8 +1,12 @@
 import json
 import time
+from urllib.parse import quote
+import re
 
+import pandas as pd
 import requests
-
+from bs4 import BeautifulSoup
+from fake_useragent import UserAgent
 
 nameList = ['M4A1 消音型 | 暴怒野兽 (久经沙场)',
             'M4A4 | 死寂空间 (略有磨损)',
@@ -44,100 +48,55 @@ nameList = ['M4A1 消音型 | 暴怒野兽 (久经沙场)',
             'MP9 | 星使 (久经沙场)',
             'AK-47 |翡翠细条纹 (久经沙场)'
             ]
-session = requests.Session()
-loginUrl = "https://api.youpin898.com/api/user/Auth/PwdSignIn"
 
-loginHeaders = {
-    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/116.0.0.0 Safari/537.36 Edg/116.0.1938.54',
-    'Referer': 'https://www.youpin898.com/'
-}
-loginData = {
-    'UserName': '',
-    'UserPwd': '',
-    'Code': '',
-    'SessionId': ''
-}
-# session对象登录，记录登录的状态
-html = session.post(url=loginUrl, headers=loginHeaders, json=loginData)
-token = json.loads(html.text)['Data']['Token']
-# session对象的登录的状态去请求
-uuHeaders = {
-    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/116.0.0.0 Safari/537.36',
-    'Authorization': 'Bearer ' + token
-}
 
-def getUUUserID():
-    uuUrl = 'https://api.youpin898.com/api/user/Account/GetUserInfo'
-    html = session.get(uuUrl, headers=uuHeaders)
-    html.encoding = 'utf-8'
-    jsonStr = json.loads(html.text)
-    userID = jsonStr['Data']['UserId']
-    return userID
-def getUUJewelryList(nameList):
-    uuUrl = 'https://api.youpin898.com/api/homepage/search/match'
-    jewelryList = []
-    for name in nameList:
-        uuData = {
-            'keyWords': name,
-            'listType': '10'
-        }
-        html = session.post(uuUrl, headers=uuHeaders, json=uuData)
-        jsonStr = json.loads(html.text)
-        items = jsonStr['Data']['dataList']
-        for item in items:
-            jewelryID = item['templateId']
-            jewelryName = item['commodityName']
+fileName = '../jewelry5.xls'
+C5Headers = {
+    'User-Agent': UserAgent().random,
+}
+proxies = {
+            'http': 'http://{}'.format('8.129.28.247:8888'),
+            'https': 'https://{}'.format('8.129.28.247:8888'),
+}
+def xr_formExcel(fileName):
+    df = pd.read_excel(fileName,sheet_name= 'sheet1')
+    listx = df['C5饰品id'].tolist()
+    listx = [str(i) for i in listx]
+    return listx
+def getC5Price(jewelryList):
+    urlPathStart = 'https://www.c5game.com/napi/trade/steamtrade/sga/sell/v3/list?itemId='
+    urlPathEnd = '&delivery=&page=1&limit=10'
+    for jewelry in jewelryList:
+        url = urlPathStart + jewelry + urlPathEnd
+        response = requests.get(url, headers=C5Headers,proxies=proxies)
+        jsonStr = json.loads(response.text)
+        items = jsonStr['data']['list']
+        if (len(items) != 0):
+            item = items[0]
+            name = item['itemName']
+            price = item['cnyPrice']
             statTrak = 'StatTrak'  # 去除暗金
-            if (statTrak in jewelryName):
+            if (statTrak in name):
                 continue
             souvenir = '纪念品'
-            if (souvenir in jewelryName):
+            if (souvenir in name):
                 continue
-            jewelryList.append(jewelryID)
-        time.sleep(0.1)
-    return jewelryList
+            misicBox = '花脸'
+            if (misicBox in name):
+                continue
+            out = '★'
+            if (out in name):
+                continue
+            out1 = '伽玛多普勒'
+            if (out1 in name):
+                continue
+            print(name + ": " + price)
 
-def getUUSellPrice(jewelryList,userID):
-    uuUrl = 'https://api.youpin898.com/api/homepage/v2/es/commodity/GetCsGoPagedList'
-    uuSellPriceList = []
-    for jewelry in jewelryList:
-        uuData = {
-            'listSortType': 1,
-            'listType': 10,
-            'pageIndex': 1,
-            'pageSize': 10,
-            'sortType': 1,
-            'stickers': {},
-            'stickersIsSort': False,
-            'templateId': jewelry,
-            'userId': userID
-        }
-        html = session.post(uuUrl, headers=uuHeaders, json=uuData)
-        jsonStr = json.loads(html.text)
-        price = jsonStr['Data']['CommodityList'][0]['Price']
-        uuSellPriceList.append(price)
-        time.sleep(0.1)
-    return uuSellPriceList
-def getUUBuyPrice(jewelryList):
-    uuUrl = 'https://api.youpin898.com/api/youpin/commodity/purchase/find'
-    uuBuyPriceList = []
-    for jewelry in jewelryList:
-        uuData = {
-            'pageIndex': 1,
-            'pageSize': 50,
-            'templateId': jewelry
-        }
-        html = session.post(uuUrl, headers=uuHeaders, json=uuData)
-        jsonStr = json.loads(html.text)
-        price = jsonStr['data']['response'][0]['unitPrice']
-        uuBuyPriceList.append(price/100.00)
-        time.sleep(0.1)
-    return uuBuyPriceList
-
-jewelryList = getUUJewelryList(nameList)
+jewelryList = xr_formExcel(fileName)
+jewelryList = list(dict.fromkeys(jewelryList))
 print(len(jewelryList))
-userID = getUUUserID()
-uuSellPriceList = getUUSellPrice(jewelryList,userID)
-uuBuyPriceList = getUUBuyPrice(jewelryList)
-for i in range(0, len(nameList)):
-    print(nameList[i] + ': ' + str(uuSellPriceList[i]) + '   ' + str(uuBuyPriceList[i]))
+getC5Price(jewelryList)
+# igxePriceList = getIgxeJewelryList(nameList)
+# print(len(igxePriceList))
+# for i in range(0, len(nameList)):
+#     print(nameList[i] + ': ' + igxePriceList[i])

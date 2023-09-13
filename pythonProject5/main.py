@@ -9,15 +9,14 @@ import xlsxwriter as xw
 import os
 
 C5Headers = {
-    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36 Edg/115.0.1901.200',
-    'Cookie': 'NC5_deviceId=169050548948190205; NC5_version_id=new_web_grey; _bl_uid=dOlRek6nlI9vh1baRqs8h8sk14mL; noticeList=%5B%22174%22%5D; hideNotice=0; Hm_lvt_86084b1bece3626cd94deede7ecf31a8=1692579256,1692670832,1692751966,1692841262; NC5_newC5login=1; PHPSESSID=eto84kfqiql35fpetcaedussr3; CaseNotice=%E6%B4%BB%E5%8A%A8%E9%A5%B0%E5%93%81%E4%B8%80%E8%88%AC%E4%BC%9A%E5%9C%A830%E6%97%A5%E5%86%85%E6%9C%89%E5%BA%8F%E5%8F%91%E5%87%BA%EF%BC%8C%E5%A6%82%E6%9C%89%E9%97%AE%E9%A2%98%E5%8F%AF%E5%92%A8%E8%AF%A2%E5%9C%A8%E7%BA%BF%E5%AE%A2%E6%9C%8D%E3%80%82%20%20; NC5_uid=1000189316; NC5_isShowInspect=-1; _csrf=ef31974c96bf8f8cda74f9546539babbd8d43ae8ec6df9fb0bf128ad362262c9a%3A2%3A%7Bi%3A0%3Bs%3A5%3A%22_csrf%22%3Bi%3A1%3Bs%3A32%3A%22Tnltc1spYsUAgB6xoY7ly4uGTGbCJpat%22%3B%7D; NC5_crossAccessToken=undefined; Hm_lpvt_86084b1bece3626cd94deede7ecf31a8=1692858886'
+    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/92.0.4515.131 Safari/537.36 SLBrowser/8.0.1.5162 SLBChan/105',
+    'Cookie': 'aliyungf_tc=973ec8d0de2e40404ce0f1d2dc14bdb5699941578837a76c922e3d083aa02f74; alicfw=2842237974%7C2044019511%7C1328233706%7C1328232806; alicfw_gfver=v1.200309.1; NC5_crossAccessToken=undefined; NC5_deviceId=169413670065317710; NC5_version_id=new_web_grey; noticeList=%5B%5D; hideNotice=0; Hm_lvt_86084b1bece3626cd94deede7ecf31a8=1694136705; _bl_uid=3zl6emUm93Ox3z94L5jv1C624z42; Hm_lpvt_86084b1bece3626cd94deede7ecf31a8=1694136740'
 }
 
 buffHeaders = {
-    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36 Edg/115.0.1901.200',
-    'Cookie': '_ntes_nnid=a81ea4b883a087c51b7d8b9f7ce5c913,1690947339047; _ntes_nuid=a81ea4b883a087c51b7d8b9f7ce5c913; Device-Id=3ABe7sqJnoICsII0jmdm; timing_user_id=time_AJGrS6MTiv; Locale-Supported=zh-Hans; game=csgo; AQ_HD=1; YD_SC_SID=624E8F2F08404604A8ECC0A9A7594388; AQ_REQ_FROM=webzj; NTES_YD_SESS=dBpdmWLRcSGCvBLmxymnQiz1uDOnnJKj6pZgLdVoTmJuqC5iqgFBt6PFs.7EZ_6mYLWGAEyRRzg4zpmWcmrVCcXhE6sc0ELel7isPlQeNyozGQ4Bv2MXm8AUQDA86BN9Ql5iJERSwf6i5G7knOBRWek58SD.Z8sKYQjtjUoR2iJO1E1iNfaxaD8mwbUFM00mc4amJK7NJPBaxMW2w6qGY0kRwkvl0rN8LY5ngqdYqf9uP; S_INFO=1693206419|0|0&60##|13162147622; P_INFO=13162147622|1693206419|1|netease_buff|00&99|null&null&null#shh&null#10#0|&0|null|13162147622; remember_me=U1102355461|F8sxxahVWHiaaHcRtzmqH4i7KbjmPoDu; session=1-9vKV3-1blP5LYUmdEDJMMUNrlIIEJmgOIJJ_DXeN70vX2038039389; csrf_token=ImE2OGI3ZDViMTI1ZjcwNGZjODM3ZjQ2ODFiZTMzOWE5MDE0Y2EzNTQi.F83ZPw.P_pUG0eBtFdQ1Qo2wEbBwhoDn-E'
+    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/92.0.4515.131 Safari/537.36 SLBrowser/8.0.1.5162 SLBChan/105',
+    'Cookie': 'Device-Id=XR36oi8s6mnFAKPgtUJk; Locale-Supported=zh-Hans; game=csgo; NTES_YD_SESS=QZYSXDIOMWHuuBNoSwqaPkASw2cGqUh35t1DlQ4wWvgUSnZrSDeaKRKbd05rnTH7nFZky6lkn4ESYpoRhJD9zCrH3AQH6R1s6urHkZ2PiqcPu9maM5p0vcOX9HOcRaJV9bJtEURIr.e.7D_04o3HUeTexEGJBzNwrfZOKw30d_Nl_3qcOzQJWWkPbKCf4KMq9pQHStbqVXYOYZ5Dznr.2HRJpdliicAqXNZqDSQNSsVUh; S_INFO=1694137382|0|0&60##|17346697622; P_INFO=17346697622|1694137382|1|netease_buff|00&99|shh&1693202991&netease_buff#shh&null#10#0#0|&0||17346697622; remember_me=U1102096421|CQVYiNWOeKiX7bqRPBR9VAEATucibbCu; session=1-ghfmOYCGgANyLFI389WG5VMmtVq2IbN3zgZrAB0KCf6b2038314877; csrf_token=IjY5YWFkZTYxZjAyN2ZiNWFhZDg1ZmEwMzI3MWU4ZjIxZDdhODA2Yzki.F9wNxw.z159__gSYXKtKR-bQ6D-IRSNmBc'
 }
-
 session = requests.Session()
 loginUrl = "https://api.youpin898.com/api/user/Auth/PwdSignIn"
 
@@ -39,8 +38,8 @@ uuHeaders = {
     'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/116.0.0.0 Safari/537.36',
     'Authorization': 'Bearer ' + token
 }
-lowPrice = 200
-highPrice = 1000
+lowPrice = 10
+highPrice = 300
 lowSaleNumber = 300
 fileName = '../jewelry3.xls'
 
@@ -53,6 +52,8 @@ def xw_toExcel(data,data1,uuSellPriceList,uuBuyPriceList):  # xlsxwriter库储�
     worksheet1.write_row('A1', title)  # 从A1单元格开始写入表头
     i = 2  # 从第二行开始写入数据
     for j in range(len(data)):
+        if((data1[j]['buffSellPrice'] == '1.00') | (uuBuyPriceList[j] == 1.00)):
+            continue
         buffProfit =  (0.99 * float(data[j]['price'])/float(data1[j]['buffSellPrice']) - 1) * 100
         steamProfit = float(data1[j]['buffSellPrice'])/(float(data1[j]['steamPrice']) * 0.86)
         uuBuyProfit =  (0.99 * float(data[j]['price'])/uuBuyPriceList[j] - 1) * 100
@@ -143,12 +144,6 @@ def getC5Price(jewelryList):
             item = items[0]
             name = item['itemName']
             price = item['cnyPrice']
-            statTrak = 'StatTrak'  # 去除暗金
-            if (statTrak in name):
-                continue
-            souvenir = '纪念品'
-            if (souvenir in name):
-                continue
             if (float(price) < lowPrice):
                 continue
             if (float(price) > highPrice):
@@ -176,30 +171,30 @@ def getBuffAllPrice(dataList):
             if response.status_code == 200:
                 jsonStr = json.loads(response.text)
                 itemList = jsonStr['data']['items']
+                point = 0
                 for item in itemList:
                     itemName = item['name']
                     itemSellPirce = item['sell_min_price']
                     itemBuyPrice = item['buy_max_price']
                     itemSteamPrice = item['goods_info']['steam_price_cny']
-                    statTrak = 'StatTrak'  # 去除暗金
-                    if (statTrak in itemName):
+                    if(data['name'] != itemName):
                         continue
-                    souvenir = '纪念品'
-                    if (souvenir in itemName):
-                        continue
-                    misicBox = '花脸'
-                    if (misicBox in itemName):
-                        continue
+                    point = 1
                     print(itemName + ': ' + itemSellPirce + '   ' + itemBuyPrice + '   ' + itemSteamPrice)
                     dic = {}
                     dic['buffSellPrice'] = itemSellPirce
                     dic['buffBuyPrice'] = itemBuyPrice
                     dic['steamPrice'] = itemSteamPrice
                     data1.append(dic)
+                if(point == 0):
+                    dic = {}
+                    dic['buffSellPrice'] = '1.00'
+                    dic['buffBuyPrice'] = '1.00'
+                    dic['steamPrice'] = '1.00'
+                    data1.append(dic)
             else:
                 print("响应码错误" + response.status_code)
-                sys.exit(1)
-            time.sleep(4)
+            time.sleep(5)
         return data1
     except:
         print('爬取失败')
@@ -223,21 +218,17 @@ def getUUJewelryList(dataList):
         html = session.post(uuUrl, headers=uuHeaders, json=uuData)
         jsonStr = json.loads(html.text)
         items = jsonStr['Data']['dataList']
-        for item in items:
-            jewelryID = item['templateId']
-            jewelryName = item['commodityName']
-            if(jewelryName != name):
-                continue
-            # statTrak = 'StatTrak'  # 去除暗金
-            # if (statTrak in jewelryName):
-            #     continue
-            # souvenir = '纪念品'
-            # if (souvenir in jewelryName):
-            #     continue
-            # key = '钥匙'
-            # if (key in jewelryName):
-            #     continue
-            jewelryList.append(jewelryID)
+        if (len(items) != 0):
+            point = 0
+            for item in items:
+                jewelryID = item['templateId']
+                jewelryName = item['commodityName']
+                if (jewelryName != name):
+                    continue
+                point = 1
+                jewelryList.append(jewelryID)
+            if (point == 0):
+                jewelryList.append(0)
         time.sleep(0.1)
     return jewelryList
 
@@ -245,6 +236,9 @@ def getUUSellPrice(jewelryList,userID):
     uuUrl = 'https://api.youpin898.com/api/homepage/v2/es/commodity/GetCsGoPagedList'
     uuSellPriceList = []
     for jewelry in jewelryList:
+        if (jewelry == 0):
+            uuSellPriceList.append('0.0')
+            continue
         uuData = {
             'listSortType': 1,
             'listType': 10,
@@ -268,6 +262,9 @@ def getUUBuyPrice(jewelryList):
     uuUrl = 'https://api.youpin898.com/api/youpin/commodity/purchase/find'
     uuBuyPriceList = []
     for jewelry in jewelryList:
+        if (jewelry == 0):
+            uuBuyPriceList.append(1.00)
+            continue
         uuData = {
             'pageIndex': 1,
             'pageSize': 50,
