@@ -13,7 +13,7 @@ lowPrice = 10
 highPrice = 300
 fileName = '../jewelry3.xls'
 C5Headers = {
-    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/92.0.4515.131 Safari/537.36 SLBrowser/8.0.1.5162 SLBChan/105',
+    'User-Agent': UserAgent().random,
     'Cookie': 'aliyungf_tc=973ec8d0de2e40404ce0f1d2dc14bdb5699941578837a76c922e3d083aa02f74; alicfw=2842237974%7C2044019511%7C1328233706%7C1328232806; alicfw_gfver=v1.200309.1; NC5_crossAccessToken=undefined; NC5_deviceId=169413670065317710; NC5_version_id=new_web_grey; noticeList=%5B%5D; hideNotice=0; Hm_lvt_86084b1bece3626cd94deede7ecf31a8=1694136705; _bl_uid=3zl6emUm93Ox3z94L5jv1C624z42; Hm_lpvt_86084b1bece3626cd94deede7ecf31a8=1694136740'
 }
 csqaqHeaders = {

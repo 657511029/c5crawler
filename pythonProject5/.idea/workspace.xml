@@ -4,18 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c7333f8e-b950-4651-a2e5-52ddad58f83a" name="Changes" comment="增加获取Buff最低售价和最高求购，但因为Buff访问限制，爬取时间过长">
-      <change afterPath="$PROJECT_DIR$/csqaq.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ipPools.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/reconfiguration.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../jewelry3.xls" beforeDir="false" afterPath="$PROJECT_DIR$/../jewelry3.xls" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../jewelry5.xls" beforeDir="false" afterPath="$PROJECT_DIR$/../jewelry5.xls" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bestC5game.py" beforeDir="false" afterPath="$PROJECT_DIR$/bestC5game.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/buff.py" beforeDir="false" afterPath="$PROJECT_DIR$/buff.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/c5agme.py" beforeDir="false" afterPath="$PROJECT_DIR$/c5agme.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/uuyp.py" beforeDir="false" afterPath="$PROJECT_DIR$/uuyp.py" afterDir="false" />
-    </list>
+    <list default="true" id="c7333f8e-b950-4651-a2e5-52ddad58f83a" name="Changes" comment="增加获取Buff最低售价和最高求购，但因为Buff访问限制，爬取时间过长" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -233,7 +222,7 @@
       <workItem from="1695257682912" duration="10365000" />
       <workItem from="1695343928953" duration="5797000" />
       <workItem from="1695602657242" duration="664000" />
-      <workItem from="1695604796858" duration="1787000" />
+      <workItem from="1695604796858" duration="2133000" />
     </task>
     <task id="LOCAL-00001" summary="增加获取Buff最低售价和最高求购，但因为Buff访问限制，爬取时间过长">
       <option name="closed" value="true" />

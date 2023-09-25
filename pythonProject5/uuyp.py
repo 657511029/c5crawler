@@ -55,13 +55,17 @@ C5Headers = {
     'User-Agent': UserAgent().random,
 }
 proxies = {
-            'http': 'http://{}'.format('58.246.43.50:3128'),
-            'https': 'http://{}'.format('58.246.43.50:3128'),
+            'http': 'http://{}'.format('222.74.73.202:42055'),
+            'https': 'http://{}'.format('222.74.73.202:42055'),
+# 222.74.73.202:42055
+# 61.216.156.222:60808
+# 183.236.232.160:8080
 }
 def getC5Price():
-    url = 'https://www.ip.cn/api/index?ip=&type=0'
-    resp = requests.get(url, proxies=proxies)
-    print(resp.text)
+    # url = 'https://www.c5game.com/napi/trade/steamtrade/sga/sell/v3/list?itemId=553454930&delivery=&page=1&limit=10'
+    # url = 'https://www.baidu.com/'
+    url = 'https://www.zhihu.com/'
+    resp = requests.get(url, proxies=proxies,headers=C5Headers)
     if resp.status_code == 200:
         print('\033[31m可用\033[0m')
         # 可以的IP 写入文本以便后续使用

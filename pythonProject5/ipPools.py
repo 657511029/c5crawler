@@ -10,9 +10,9 @@ class IpPool:
     def __init__(self):
         # 测试ip是否可用url
         # self.test_url = 'http://httpbin.org/get'
-        self.test_url = 'https://www.c5game.com/napi/trade/steamtrade/sga/sell/v3/list?itemId=22949&delivery=&page=1&limit=10'
+        self.test_url = 'https://www.baidu.com/'
         # 获取IP的 目标url
-        self.url = 'https://www.89ip.cn/index_{}.html'
+        self.url = 'https://www.kuaidaili.com/free/inha/{}/'
 
         self.headers = {'User-Agent': UserAgent().random}
         # 存储可用ip
@@ -46,7 +46,7 @@ class IpPool:
         '''测试代理IP是否可用'''
         proxies = {
             'http': 'http://{}'.format(proxy),
-            'https': 'https://{}'.format(proxy),
+            'https': 'http://{}'.format(proxy),
         }
         # 参数类型
         # proxies
@@ -73,7 +73,7 @@ class IpPool:
         # .......
         # 提供的免费ip太多
         # 这里只获取前100页提供的免费代理IP测试
-        for i in range(1, 11):
+        for i in range(30, 100):
             # 拼接完整的url
             page_url = self.url.format(i)
             # 注意抓取控制频率
