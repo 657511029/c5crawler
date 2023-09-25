@@ -118,6 +118,7 @@ def getC5BuyPrice(dataList):
 def getIgxePrice(dataList):
     urlStart = 'https://www.igxe.cn/market/csgo?keyword='
     urls = []
+    map = {}
     for data in dataList:
         name = data['name']
         jewelryName = quote(name)

@@ -50,52 +50,25 @@ nameList = ['M4A1 消音型 | 暴怒野兽 (久经沙场)',
             ]
 
 
-fileName = '../jewelry5.xls'
+
 C5Headers = {
     'User-Agent': UserAgent().random,
 }
 proxies = {
-            'http': 'http://{}'.format('8.129.28.247:8888'),
-            'https': 'https://{}'.format('8.129.28.247:8888'),
+            'http': 'http://{}'.format('58.246.43.50:3128'),
+            'https': 'http://{}'.format('58.246.43.50:3128'),
 }
-def xr_formExcel(fileName):
-    df = pd.read_excel(fileName,sheet_name= 'sheet1')
-    listx = df['C5饰品id'].tolist()
-    listx = [str(i) for i in listx]
-    return listx
-def getC5Price(jewelryList):
-    urlPathStart = 'https://www.c5game.com/napi/trade/steamtrade/sga/sell/v3/list?itemId='
-    urlPathEnd = '&delivery=&page=1&limit=10'
-    for jewelry in jewelryList:
-        url = urlPathStart + jewelry + urlPathEnd
-        response = requests.get(url, headers=C5Headers,proxies=proxies)
-        jsonStr = json.loads(response.text)
-        items = jsonStr['data']['list']
-        if (len(items) != 0):
-            item = items[0]
-            name = item['itemName']
-            price = item['cnyPrice']
-            statTrak = 'StatTrak'  # 去除暗金
-            if (statTrak in name):
-                continue
-            souvenir = '纪念品'
-            if (souvenir in name):
-                continue
-            misicBox = '花脸'
-            if (misicBox in name):
-                continue
-            out = '★'
-            if (out in name):
-                continue
-            out1 = '伽玛多普勒'
-            if (out1 in name):
-                continue
-            print(name + ": " + price)
+def getC5Price():
+    url = 'https://www.ip.cn/api/index?ip=&type=0'
+    resp = requests.get(url, proxies=proxies)
+    print(resp.text)
+    if resp.status_code == 200:
+        print('\033[31m可用\033[0m')
+        # 可以的IP 写入文本以便后续使用
+    else:
+        print('不可用')
 
-jewelryList = xr_formExcel(fileName)
-jewelryList = list(dict.fromkeys(jewelryList))
-print(len(jewelryList))
-getC5Price(jewelryList)
+getC5Price()
 # igxePriceList = getIgxeJewelryList(nameList)
 # print(len(igxePriceList))
 # for i in range(0, len(nameList)):

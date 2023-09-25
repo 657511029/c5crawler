@@ -196,7 +196,7 @@ def getIgxePrice(dataList):
         name = data['name']
         jewelryName = quote(name)
         url = urlStart + jewelryName
-        html = requests.get(url,hsieaders=igxeHeaders)
+        html = requests.get(url,headers=igxeHeaders)
         soup = BeautifulSoup(html.text, "html.parser")
         data_list = soup.find_all(class_="list list")
         assert len(data_list) == 1, "unmatched data list"
