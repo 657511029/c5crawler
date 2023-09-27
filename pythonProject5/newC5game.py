@@ -201,7 +201,7 @@ def compareUUBuyPrice(name,price,jewelryID,point):
     if (len(priceList) != 0):
         uuBuyPrice = priceList[0]['unitPrice']/100.00
     if (float(price) < uuBuyPrice):
-        print(str(point) + ':  与uu求购相比(c5在售:uu求购):   ' + name + ': ' + str(price) + '  ' + str(uuBuyPrice))
+        print((str(point) + ':').ljust(6) + '与uu求购相比(c5在售:uu求购):'.ljust(26) + name + ': ' + str(price) + '  ' + str(uuBuyPrice))
     compareIgxePrice(name,uuBuyPrice,point)
 def compareIgxePrice(name,uuBuyPrice,point):
     urlStart = 'https://www.igxe.cn/market/csgo?keyword='
@@ -218,7 +218,7 @@ def compareIgxePrice(name,uuBuyPrice,point):
         priceStr = candidates[0].find(class_="price").text
         igxePrice = float(priceStr[1:])
         if ((igxePrice != 0.0) and (uuBuyPrice > igxePrice)):
-            print(str(point) + ':  与igxe在售相比(igxe在售:uu求购):   ' + name + ': ' + str(igxePrice) + '  ' + str(uuBuyPrice))
+            print((str(point) + ':').ljust(6) + '与igxe在售相比(igxe在售:uu求购):'.ljust(26) + name + ': ' + str(igxePrice) + '  ' + str(uuBuyPrice))
 
 def start():
     T1 = time.time()

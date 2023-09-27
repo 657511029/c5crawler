@@ -39,15 +39,20 @@ def xw_toExcel(fileName,dataList,buffAndUUMap):  # xlsxwriter库储存数据到e
     worksheet1.activate()  # 激活表
     title = ['饰品名称', 'C5饰品id','C5自发/buff','C5自发/uu求购','buff在售/uu求购','steam/buff','c5自发价格','buff最低售价','buff最高求购','uu最低售价','uu最高求购']  # 设置表头
     worksheet1.write_row('A1', title)  # 从A1单元格开始写入表头
+    allC5Price = 0.00
+    allBuffSellPrice = 0.00
+    allUUBuyPrice = 0.00
     i = 2  # 从第二行开始写入数据
     for j in range(len(dataList)):
         name = dataList[j]['name']
         C5Price = float(dataList[j]['price'])
+
         C5ID = dataList[j]['itemID']
         if(name not in buffAndUUMap.keys()):
             continue
         buffAndUUPrice = buffAndUUMap[name]
         buffSellPrice = buffAndUUPrice['buffSellPrice']
+
         buffBuyPrice = buffAndUUPrice['buffBuyPrice']
         steamPrice = buffAndUUPrice['steamPrice']
         uuSellPrice = buffAndUUPrice['uuSellPrice']
@@ -62,6 +67,11 @@ def xw_toExcel(fileName,dataList,buffAndUUMap):  # xlsxwriter库储存数据到e
         steamProfit = buffSellPrice/(steamPrice * 0.86)
         uuBuyProfit =  (0.99 * C5Price/uuBuyPrice - 1) * 100
         buffUU = (buffBuyPrice / uuBuyPrice - 1) * 100
+
+        allC5Price = allC5Price + C5Price
+        allBuffSellPrice = allBuffSellPrice + buffSellPrice
+        allUUBuyPrice = allUUBuyPrice + uuBuyPrice
+
         insertData = [name,C5ID,buffProfit,uuBuyProfit,buffUU,steamProfit,C5Price,buffSellPrice,buffBuyPrice,uuSellPrice,uuBuyPrice]
         row = 'A' + str(i)
         worksheet1.write_row(row, insertData)
@@ -69,7 +79,8 @@ def xw_toExcel(fileName,dataList,buffAndUUMap):  # xlsxwriter库储存数据到e
     worksheet1.set_column('A:A',50)
     worksheet1.set_column('B:K',20)
     workbook.close()  # 关闭表
-
+    print('c5自发总体利润(C5自发总体/buff在售总体):  ' + str((0.99 * allC5Price/allBuffSellPrice - 1) * 100) + '%')
+    print('c5自发总体利润(C5自发总体/uu求购总体):  ' + str((0.99 * allC5Price / allUUBuyPrice - 1) * 100) + '%')
 def getAllBoxID():
     urlPathStart = 'https://www.c5game.com/playground/case'
     try:
@@ -132,7 +143,10 @@ def getC5Price(jewelryList):
     urlPathStart = 'https://www.c5game.com/napi/trade/steamtrade/sga/sell/v3/list?itemId='
     urlPathEnd = '&delivery=2&page=1&limit=10'
     dataList = []
+    point = 0
     for jewelry in jewelryList:
+        point = point + 1
+        print('\r' + '当前进度：{}'.format(point) + ' / ' + str(len(jewelryList)), end='')
         url = urlPathStart + jewelry + urlPathEnd
         response = requests.get(url, headers=C5Headers)
         jsonStr = json.loads(response.text)
@@ -154,7 +168,10 @@ def getC5Price(jewelryList):
 def getCsqaqIDList(nameList):
     urlPathStart = 'https://csqaq.com/proxies/api/v1/detail?result='
     csqaqIDList = []
+    point = 0
     for name in nameList:
+        point = point + 1
+        print('\r' + '当前进度：{}'.format(point) + ' / ' + str(len(nameList)) + '      ' + name, end='')
         jewelryName = quote(name).replace('%7C', '|')
         jewelryName = jewelryName.replace('%28', '(')
         jewelryName = jewelryName.replace('%29', ')')
@@ -163,33 +180,36 @@ def getCsqaqIDList(nameList):
         if response.status_code == 200:
             jsonStr = json.loads(response.text)
             itemList = jsonStr['data']
-            point = 0
+            flag = 0
             for item in itemList:
                 itemName = item['value']
                 itemId = item['id']
                 if (name != itemName):
                     continue
-                point = 1
+                flag = 1
                 map = {}
                 map['name'] = name
                 map['id'] = itemId
                 csqaqIDList.append(map)
-            if (point == 0):
+            if (flag == 0):
                 map = {}
                 map['name'] = name
                 map['id'] = '0'
                 csqaqIDList.append(map)
         else:
-            print("响应码错误" + str(response.status_code))
+            print('\r' + '响应码错误' + str(response.status_code)  + '  ' + name)
     return csqaqIDList
 def getBuffAndUUPriceList(csqaqIDList):
     urlPathStart = 'https://csqaq.com/proxies/api/v1/info/good?id='
     buffAndUUMap = {}
+    point = 0
     for csqaqID in csqaqIDList:
         itemID = csqaqID['id']
         itemName = csqaqID['name']
+        point = point + 1
+        print('\r' + '当前进度：{}'.format(point) + ' / ' + str(len(csqaqIDList)) + '      ' + itemName, end='')
         if(itemID == '0'):
-            print('名称找不到    ' + itemName)
+            print('\r' + '名称找不到    ' + itemName)
             continue
         url = urlPathStart + itemID
         response = requests.get(url, headers=csqaqHeaders)
@@ -207,10 +227,11 @@ def getBuffAndUUPriceList(csqaqIDList):
             map['steamPrice'] = steamPrice
             map['uuSellPrice'] = uuSellPrice
             map['uuBuyPrice'] = uuBuyPrice
-            print('获取数据成功:   ' + itemName)
+            # print('获取数据成功:   ' + itemName)
             buffAndUUMap[itemName] = map
         else:
-            print("响应码错误" + str(response.status_code) + '  ' + csqaqID['name'])
+            print('\r' + '响应码错误: ' + str(response.status_code) + '  ' + csqaqID['name'])
+
         time.sleep(2)
     return buffAndUUMap
 def start():
@@ -220,21 +241,22 @@ def start():
         jewelryList = list(dict.fromkeys(jewelryList))
         nameList = xr_nameFormExcel(fileName)
         nameList = list(dict.fromkeys(nameList))
-        os.remove(fileName)
-        print('删除旧文件')
+        print('读取数据成功')
     else:
         boxIDList = getAllBoxID()
         jewelryList = getJewelryList(boxIDList)
 
 
     dataList = getC5Price(jewelryList)
-    print('成功获取c5在售数据:      ' + str(len(dataList)))
+    print('\r' + '成功获取c5在售数据:      ' + str(len(dataList)))
     csqaqIDList = getCsqaqIDList(nameList)
-    print('成功获取csqaqID数据:    ' + str(len(csqaqIDList)))
+    print('\r' + '成功获取csqaqID数据:    ' + str(len(csqaqIDList)))
     buffAndUUMap = getBuffAndUUPriceList(csqaqIDList)
-    print('成功获取buff和uu数据:   ' + str(len(buffAndUUMap)))
+    print('\r' + '成功获取buff和uu数据:   ' + str(len(buffAndUUMap)))
+    os.remove(fileName)
+    print('删除旧文件')
     xw_toExcel(fileName,dataList,buffAndUUMap)
-    print('写入成功')
+    print('新数据写入成功')
     T2 = time.time()
     print('程序运行时间:%s分钟' % ((T2 - T1) / 60))
 start()
